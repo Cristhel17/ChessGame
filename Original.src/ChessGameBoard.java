@@ -246,11 +246,9 @@ public class ChessGameBoard extends JPanel{
          *            the event from the listener
          */
         public void mouseClicked( MouseEvent e ){
-            if ( e.getButton() == MouseEvent.BUTTON1 &&
-                getParent() instanceof ChessPanel ){
-                ( (ChessPanel)getParent() ).getGameEngine()
-                    .determineActionFromSquareClick( e );
-            }
+        	if ( e.getButton() == MouseEvent.BUTTON1 && getParent() instanceof ChessPanel chesspanel ){
+        	    chesspanel.getGameEngine().determineActionFromSquareClick( e );
+        	}
         }
         /**
          * Unused method.

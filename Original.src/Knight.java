@@ -83,7 +83,7 @@ public class Knight
      */
     @Override
     protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
-        ArrayList<String> moves = new ArrayList<String>();
+        ArrayList<String> moves = new ArrayList<>();
         if ( isPieceOnScreen() ){
             moves.addAll( calculateNorthMoves( board ) );
             moves.addAll( calculateSouthMoves( board ) );
