@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
+import java.awt.Container;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 // -------------------------------------------------------------------------
@@ -74,7 +76,7 @@ public class ChessGameBoard extends JPanel{
      * @return ArrayList<GamePiece> the pieces
      */
     public ArrayList<ChessGamePiece> getAllWhitePieces(){
-        ArrayList<ChessGamePiece> whitePieces = new ArrayList<ChessGamePiece>();
+        ArrayList<ChessGamePiece> whitePieces = new ArrayList<>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -126,10 +128,13 @@ public class ChessGameBoard extends JPanel{
     public void resetBoard ( boolean addAfterReset ){
         chessCells = new BoardSquare[8][8];
         this.removeAll();
-        if ( getParent() instanceof ChessPanel ){
-            ( (ChessPanel)getParent() ).getGraveyard( 1 ).clearGraveyard();
-            ( (ChessPanel)getParent() ).getGraveyard( 2 ).clearGraveyard();
-            ( (ChessPanel)getParent() ).getGameLog().clearLog();
+        ChessPanel chessPanel = null;
+        Container parent = getParent();
+        if (parent instanceof ChessPanel) {
+            chessPanel = (ChessPanel) parent;
+            chessPanel.getGraveyard(1).clearGraveyard();
+            chessPanel.getGraveyard(2).clearGraveyard();
+            chessPanel.getGameLog().clearLog();
         }
         for ( int i = 0; i < chessCells.length; i++ ){
             for ( int j = 0; j < chessCells[0].length; j++ ){
@@ -141,9 +146,9 @@ public class ChessGameBoard extends JPanel{
                 {
                     chessCells[i][j].setBackground( Color.BLACK );
                 }
-                if ( addAfterReset ){
+                if ( addAfterReset && chessPanel != null ){
                     chessCells[i][j].addMouseListener( listener );
-                    this.add( chessCells[i][j] );
+                    chessPanel.add( chessCells[i][j] );
                 }
             }
         }
