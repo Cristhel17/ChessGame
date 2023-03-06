@@ -55,7 +55,7 @@ public abstract class ChessGamePiece{
      * @param pieceColor
      *            either GamePiece.WHITE, BLACK, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -87,7 +87,7 @@ public abstract class ChessGamePiece{
      * @param pieceColor
      *            either GamePiece.BLACK, WHITE, or UNASSIGNED
      */
-    public ChessGamePiece(
+    protected ChessGamePiece(
         ChessGameBoard board,
         int row,
         int col,
@@ -199,7 +199,7 @@ public abstract class ChessGamePiece{
     protected ArrayList<String> calculateEastMoves(
         ChessGameBoard board,
         int numMoves ){
-        ArrayList<String> moves = new ArrayList<String>();
+        ArrayList<String> moves = new ArrayList<>();
         int count = 0;
         if ( isPieceOnScreen() ){
             for ( int i = pieceColumn + 1; i < 8 && count < numMoves; i++ ){
@@ -267,7 +267,7 @@ public abstract class ChessGamePiece{
     protected ArrayList<String> calculateNorthWestMoves(
         ChessGameBoard board,
         int numMoves ){
-        ArrayList<String> moves = new ArrayList<String>();
+        ArrayList<String> moves = new ArrayList<>();
         int count = 0;
         if ( isPieceOnScreen() ){
             for ( int i = 1; i < 8 && count < numMoves; i++ ){
@@ -279,7 +279,6 @@ public abstract class ChessGamePiece{
                 }
                 else if ( isEnemy( board, pieceRow - i, pieceColumn - i ) ){
                     moves.add( ( pieceRow - i ) + "," + ( pieceColumn - i ) );
-                    count++;
                     break;
                 }
                 else
@@ -316,7 +315,6 @@ public abstract class ChessGamePiece{
                 }
                 else if ( isEnemy( board, pieceRow - i, pieceColumn + i ) ){
                     moves.add( ( pieceRow - i ) + "," + ( pieceColumn + i ) );
-                    count++;
                     break;
                 }
                 else
@@ -353,7 +351,6 @@ public abstract class ChessGamePiece{
                 }
                 else if ( isEnemy( board, pieceRow + i, pieceColumn - i ) ){
                     moves.add( ( pieceRow + i ) + "," + ( pieceColumn - i ) );
-                    count++;
                     break;
                 }
                 else
@@ -390,7 +387,6 @@ public abstract class ChessGamePiece{
                 }
                 else if ( isEnemy( board, pieceRow + i, pieceColumn + i ) ){
                     moves.add( ( pieceRow + i ) + "," + ( pieceColumn + i ) );
-                    count++;
                     break;
                 }
                 else
@@ -686,13 +682,7 @@ public abstract class ChessGamePiece{
         }
         else
         {
-            if ( enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE ){
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        	return enemyPiece.getColorOfPiece() == ChessGamePiece.WHITE;
         }
     }
     // ----------------------------------------------------------

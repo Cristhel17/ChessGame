@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Rook
     extends ChessGamePiece{
-    // private ArrayList<String> possibleMoves;
     // ----------------------------------------------------------
     /**
      * Create a new Rook object.

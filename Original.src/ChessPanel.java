@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.io.Serializable;
+
 import javax.swing.*;
 // -------------------------------------------------------------------------
 /**
@@ -10,13 +12,13 @@ import javax.swing.*;
  * @version 2010.11.17
  */
 public class ChessPanel
-    extends JPanel{
+    extends JPanel implements Serializable{
     private ChessMenuBar    menuBar;
     private ChessGameBoard  gameBoard;
     private ChessGameLog    gameLog;
     private ChessGraveyard  playerOneGraveyard;
     private ChessGraveyard  playerTwoGraveyard;
-    private ChessGameEngine gameEngine;
+    transient private ChessGameEngine gameEngine;
     // ----------------------------------------------------------
     /**
      * Create a new ChessPanel object.

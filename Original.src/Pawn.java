@@ -69,42 +69,33 @@ public class Pawn
      * @return ArrayList<String> the moves
      */
     @Override
-    protected ArrayList<String> calculatePossibleMoves(ChessGameBoard board) {
-        ArrayList<String> moves = new ArrayList<>();
-        if (!isPieceOnScreen()) {
+    protected ArrayList<String> calculatePossibleMoves( ChessGameBoard board ){
+        ArrayList<String> moves = new ArrayList<String>();
+        if ( !isPieceOnScreen() ) {
             return moves;
         }
 
-        int currRow = getColorOfPiece() == ChessGamePiece.WHITE ? pieceRow - 1 : pieceRow + 1;
-
-        // check for normal moves
+        int currRow = ( getColorOfPiece() == ChessGamePiece.WHITE ) ? ( pieceRow - 1 ) : ( pieceRow + 1 );
         int maxIter = notMoved ? 2 : 1;
-        for (int count = 1; count <= maxIter; count++) {
-            if (!isOnScreen(currRow, pieceColumn)) {
+
+        for ( int count = 1; count <= maxIter; count++ ) {
+            if ( !isOnScreen( currRow, pieceColumn ) || board.getCell( currRow, pieceColumn ).getPieceOnSquare() != null ) {
                 break;
             }
-            BoardSquare currSquare = board.getCell(currRow, pieceColumn);
-            if (currSquare.getPieceOnSquare() == null) {
-                moves.add(currRow + "," + pieceColumn);
-            } else {
-                break;
-            }
-            currRow += getColorOfPiece() == ChessGamePiece.WHITE ? -1 : 1;
+            moves.add( currRow + "," + pieceColumn );
+            currRow = ( getColorOfPiece() == ChessGamePiece.WHITE ) ? ( currRow - 1 ) : ( currRow + 1 );
         }
 
-        // check for enemy capture points
-        int[] captureRows = getColorOfPiece() == ChessGamePiece.WHITE ? new int[]{-1, -1} : new int[]{1, -1};
-        for (int captureRow : captureRows) {
-            int captureColumn = pieceColumn + 1;
-            if (isOnScreen(pieceRow + captureRow, captureColumn) &&
-                    isEnemy(board, pieceRow + captureRow, captureColumn)) {
-                moves.add((pieceRow + captureRow) + "," + captureColumn);
-            }
-            captureColumn = pieceColumn - 1;
-            if (isOnScreen(pieceRow + captureRow, captureColumn) &&
-                    isEnemy(board, pieceRow + captureRow, captureColumn)) {
-                moves.add((pieceRow + captureRow) + "," + captureColumn);
-            }
+        int rowOffset = ( getColorOfPiece() == ChessGamePiece.WHITE ) ? -1 : 1;
+        int leftColOffset = -1;
+        int rightColOffset = 1;
+
+        if ( isEnemy( board, pieceRow + rowOffset, pieceColumn + leftColOffset ) ) {
+            moves.add( ( pieceRow + rowOffset ) + "," + ( pieceColumn + leftColOffset ) );
+        }
+
+        if ( isEnemy( board, pieceRow + rowOffset, pieceColumn + rightColOffset ) ) {
+            moves.add( ( pieceRow + rowOffset ) + "," + ( pieceColumn + rightColOffset ) );
         }
 
         return moves;

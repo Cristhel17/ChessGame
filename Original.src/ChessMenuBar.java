@@ -91,16 +91,20 @@ public class ChessMenuBar
      * Uses Tony Allevato's code for exiting a GUI app without System.exit()
      * calls.
      */
-    private void exitHandler(){
-        JOptionPane.showMessageDialog( this.getParent(), "Thanks for leaving"
-            + ", quitter! >:(" );
+    private void exitHandler() {
+        JOptionPane.showMessageDialog(this.getParent(), "Thanks for leaving, quitter! >:(");
         Component possibleFrame = this;
-        while ( possibleFrame != null && !( possibleFrame instanceof JFrame ) ){
+        while (possibleFrame != null && !(possibleFrame instanceof JFrame)) {
             possibleFrame = possibleFrame.getParent();
         }
-        JFrame frame = (JFrame)possibleFrame;
-        frame.setVisible( false );
-        frame.dispose();
+        JFrame frame = null;
+        if (possibleFrame instanceof JFrame) {
+            frame = (JFrame) possibleFrame;
+        }
+        if (frame != null) {
+            frame.setVisible(false);
+            frame.dispose();
+        }
     }
     /**
      * Takes an appropriate action if the toggle graveyard button is clicked.
