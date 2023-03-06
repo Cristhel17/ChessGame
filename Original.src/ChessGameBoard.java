@@ -80,7 +80,7 @@ public class ChessGameBoard extends JPanel implements Serializable{
      */
     
     public List<ChessGamePiece> getAllWhitePieces(){
-    	List<ChessGamePiece> whitePieces = new ArrayList<ChessGamePiece>();
+    	List<ChessGamePiece> whitePieces = new ArrayList<>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
@@ -99,7 +99,7 @@ public class ChessGameBoard extends JPanel implements Serializable{
      * @return ArrayList<GamePiece> the pieces
      */
     public List<ChessGamePiece> getAllBlackPieces(){
-        List<ChessGamePiece> blackPieces = new ArrayList<ChessGamePiece>();
+        List<ChessGamePiece> blackPieces = new ArrayList<>();
         for ( int i = 0; i < 8; i++ ){
             for ( int j = 0; j < 8; j++ ){
                 if ( chessCells[i][j].getPieceOnSquare() != null
